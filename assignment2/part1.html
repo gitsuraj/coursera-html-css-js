@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Color Guessing</title>
+</head>
+<body onload="do_game()">
+    <script>
+        var colors = ["gray", "blue", "cyan", "gold", "magenta", "orange", "red", "white", "yellow"];
+        var target_index = 0;
+        var target = '';
+        var guess_input;
+        var count_guesses = 0;
+
+        function do_game() {
+            // sort the color for making it easy to identigy
+            colors.sort();
+            target_index = Math.floor(Math.random() * colors.length);
+            target = colors[target_index];
+            console.log("DEBUG:ranomly generated color: ",target);
+            do {
+                guess_input = prompt("I am thinking of one of these colors: \n\n"+
+                    colors.join(', ') +
+                    "\n\nWhat color am I thinking of?"
+                );
+
+                count_guesses++;
+            } while(target_index !== colors.indexOf(guess_input));
+
+            document.getElementsByTagName("body")[0].style.background = guess_input;
+
+            alert("Congratulations! You have guessed the color!\n\n" +
+                    "It took you " + count_guesses + " to finish the game!\n\n" +
+                    "You can see the colour in the background.");
+        }
+    </script>
+</body>
+</html>
